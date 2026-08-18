@@ -533,4 +533,4 @@ This allows one measure to behave intelligently across multiple drill levels.
 
 ---
 
-[← Back to Percentage Patterns](./README.md)
+[← Back to Percentage Patterns](index.md)

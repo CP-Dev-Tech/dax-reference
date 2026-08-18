@@ -383,4 +383,4 @@ The business meaning of the denominator should always be defined before selectin
 
 ---
 
-[← Back to Percentage Patterns](./README.md)
+[← Back to Percentage Patterns](index.md)

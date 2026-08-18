@@ -14,4 +14,4 @@ Reusable DAX patterns for percentage contribution, selected totals and hierarchi
 
 ---
 
-[← Back to DAX Reference Library](../../README.md)
+[← Back to DAX Reference Library](../../index.md)

@@ -22,7 +22,7 @@ The purpose of this site is to provide concise, practical guidance for common an
 
 Patterns for percentage-of-total, selected-total and hierarchical contribution calculations.
 
-[Browse Percentage Patterns](patterns/percentages/)
+[Browse Percentage Patterns](patterns/percentages/index.md)
 
 ---
 

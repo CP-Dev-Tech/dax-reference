@@ -346,4 +346,4 @@ Understanding that behaviour provides a foundation for many more advanced DAX ca
 
 ---
 
-[← Back to Percentage Patterns](./README.md)
+[← Back to Percentage Patterns](index.md)
