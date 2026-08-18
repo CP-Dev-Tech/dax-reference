@@ -41,3 +41,13 @@ This is a curated public reference derived from a larger private working library
 Only mature, reusable patterns suitable for general use are published here.
 
 Examples are intentionally generic and should be adapted to the semantic model and business requirements of the implementation in which they are used.
+
+---
+
+## Copyright and Use
+
+Copyright © 2026 Carl Patten. All rights reserved.
+
+Individual DAX examples may be adapted for use in Power BI solutions. Reproduction, republication or substantial redistribution of the library's original documentation is not permitted without permission.
+
+[Copyright and permitted use](copyright-and-use.md)

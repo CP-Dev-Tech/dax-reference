@@ -2,6 +2,7 @@ site_name: DAX Reference Library
 site_description: A curated reference library of reusable DAX patterns for Power BI.
 site_author: Carl Patten
 
+
 theme:
   name: material
 
@@ -20,3 +21,6 @@ nav:
           - Overview: patterns/filter-context/index.md
           - "004 — Ignore a Specific Filter": patterns/filter-context/ignore-specific-filter.md 
           - "005 — Keep Only a Specific Filter": patterns/filter-context/keep-only-specific-filter.md
+  - Copyright and Use: copyright-and-use.md
+
+copyright: "Copyright &copy; 2026 Carl Patten. All rights reserved."
