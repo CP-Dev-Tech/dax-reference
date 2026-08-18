@@ -13,6 +13,7 @@ The purpose of this site is to provide concise, practical guidance for common an
 | 001 | [Percentage of Total](patterns/percentages/percentage-of-total.md)                   | Percentages | Basic / Intermediate |
 | 002 | [Percentage of Selected Total](patterns/percentages/percentage-of-selected-total.md) | Percentages | Intermediate         |
 | 003 | [Percentage of Parent](patterns/percentages/percentage-of-parent.md)                 | Percentages | Intermediate         |
+| 004 | [Ignore a Specific Filter](patterns/filter-context/ignore-specific-filter.md) | Filter Context | Basic / Intermediate |
 
 ---
 
@@ -23,6 +24,12 @@ The purpose of this site is to provide concise, practical guidance for common an
 Patterns for percentage-of-total, selected-total and hierarchical contribution calculations.
 
 [Browse Percentage Patterns](patterns/percentages/index.md)
+
+### Filter Context
+
+Patterns for deliberately manipulating, preserving and removing filter context during measure evaluation.
+
+[Browse Filter Context Patterns](patterns/filter-context/index.md)
 
 ---
 

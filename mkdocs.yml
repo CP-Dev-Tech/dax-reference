@@ -16,3 +16,6 @@ nav:
           - "001 — Percentage of Total": patterns/percentages/percentage-of-total.md
           - "002 — Percentage of Selected Total": patterns/percentages/percentage-of-selected-total.md
           - "003 — Percentage of Parent": patterns/percentages/percentage-of-parent.md
+      - Filter Context:
+          - Overview: patterns/filter-context/index.md
+          - "004 — Ignore a Specific Filter": patterns/filter-context/ignore-specific-filter.md          
