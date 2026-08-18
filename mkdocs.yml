@@ -5,6 +5,12 @@ site_author: Carl Patten
 
 theme:
   name: material
+  palette:
+    scheme: default
+    primary: teal
+    accent: indigo
+  icon:
+    logo: material/database  
 
 plugins:
   - search
