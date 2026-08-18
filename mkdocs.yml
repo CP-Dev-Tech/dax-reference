@@ -1,0 +1,18 @@
+site_name: DAX Reference Library
+site_description: A curated reference library of reusable DAX patterns for Power BI.
+site_author: Carl Patten
+
+theme:
+  name: material
+
+plugins:
+  - search
+
+nav:
+  - Home: index.md
+  - Patterns:
+      - Percentages:
+          - Overview: patterns/percentages/index.md
+          - "001 — Percentage of Total": patterns/percentages/percentage-of-total.md
+          - "002 — Percentage of Selected Total": patterns/percentages/percentage-of-selected-total.md
+          - "003 — Percentage of Parent": patterns/percentages/percentage-of-parent.md
