@@ -8,12 +8,13 @@ The purpose of this site is to provide concise, practical guidance for common an
 
 ## Pattern Catalogue
 
-| ID  | Pattern                                                                              | Category    | Difficulty           |
-| --- | ------------------------------------------------------------------------------------ | ----------- | -------------------- |
-| 001 | [Percentage of Total](patterns/percentages/percentage-of-total.md)                   | Percentages | Basic / Intermediate |
-| 002 | [Percentage of Selected Total](patterns/percentages/percentage-of-selected-total.md) | Percentages | Intermediate         |
-| 003 | [Percentage of Parent](patterns/percentages/percentage-of-parent.md)                 | Percentages | Intermediate         |
-| 004 | [Ignore a Specific Filter](patterns/filter-context/ignore-specific-filter.md) | Filter Context | Basic / Intermediate |
+| ID  | Pattern                                                                              | Category       | Difficulty           |
+| --- | ------------------------------------------------------------------------------------ | -------------- | -------------------- |
+| 001 | [Percentage of Total](patterns/percentages/percentage-of-total.md)                   | Percentages    | Basic / Intermediate |
+| 002 | [Percentage of Selected Total](patterns/percentages/percentage-of-selected-total.md) | Percentages    | Intermediate         |
+| 003 | [Percentage of Parent](patterns/percentages/percentage-of-parent.md)                 | Percentages    | Intermediate         |
+| 004 | [Ignore a Specific Filter](patterns/filter-context/ignore-specific-filter.md)        | Filter Context | Basic / Intermediate |
+| 005 | [Keep Only Specific Filters](patterns/filter-context/keep-only-specific-filters.md)  | Filter Context | Intermediate         |
 
 ---
 
