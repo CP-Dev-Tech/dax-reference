@@ -1,0 +1,2085 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A curated reference library of reusable DAX patterns for Power BI.">
+      
+      
+        <meta name="author" content="Carl Patten">
+      
+      
+      
+        <link rel="prev" href="../">
+      
+      
+        <link rel="next" href="../keep-only-specific-filter/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>004 — Ignore a Specific Filter - DAX Reference Library</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dax-pattern-004-ignore-a-specific-filter" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="DAX Reference Library" class="md-header__button md-logo" aria-label="DAX Reference Library" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            DAX Reference Library
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              004 — Ignore a Specific Filter
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="DAX Reference Library" class="md-nav__button md-logo" aria-label="DAX Reference Library" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    DAX Reference Library
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Patterns
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Patterns
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Percentages
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Percentages
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../percentages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../percentages/percentage-of-total/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    001 — Percentage of Total
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../percentages/percentage-of-selected-total/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    002 — Percentage of Selected Total
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../percentages/percentage-of-parent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    003 — Percentage of Parent
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Filter Context
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Filter Context
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    004 — Ignore a Specific Filter
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    004 — Ignore a Specific Filter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#purpose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#when-to-use" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When to Use
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#business-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Business Example
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#base-measure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Base Measure
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dax-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DAX Pattern
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Works
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How It Works">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-start-with-the-current-filter-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Start with the Current Filter Context
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-modify-the-filter-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Modify the Filter Context
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-principle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Principle
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#filter-context-comparison" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Filter-Context Comparison
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Filter-Context Comparison">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#standard-measure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Standard Measure
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filter-removal-measure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Filter-Removal Measure
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-use-calculate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Use CALCULATE?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#column-level-filter-removal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Column-Level Filter Removal
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Column-Level Filter Removal">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#column-level-removal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Column-Level Removal
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#table-level-removal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table-Level Removal
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-with-multiple-filters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example with Multiple Filters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-use-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common Use Cases
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Common Use Cases">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#benchmark-against-a-wider-group" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Benchmark Against a Wider Group
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixed-reference-line" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed Reference Line
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ignore-a-slicer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ignore a Slicer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparative-measures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparative Measures
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assumptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assumptions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common Pitfalls
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Common Pitfalls">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#removing-too-much-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Removing Too Much Context
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#removing-the-wrong-column" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Removing the Wrong Column
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#assuming-visual-layout-equals-filter-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assuming Visual Layout Equals Filter Context
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#repeating-aggregation-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repeating Aggregation Logic
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Performance Considerations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alternatives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternatives
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alternatives">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#all" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ALL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#allselected" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ALLSELECTED
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#allexcept" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ALLEXCEPT
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#explicit-filter-expressions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Explicit Filter Expressions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#relationship-to-percentage-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Relationship to Percentage Patterns
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related Patterns
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#classification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classification
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#revision-history" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Revision History
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../keep-only-specific-filter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    005 — Keep Only a Specific Filter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../copyright-and-use/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Copyright and Use
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#purpose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#when-to-use" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When to Use
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#business-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Business Example
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#base-measure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Base Measure
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dax-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DAX Pattern
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Works
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How It Works">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-start-with-the-current-filter-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Start with the Current Filter Context
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-modify-the-filter-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Modify the Filter Context
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-principle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Principle
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#filter-context-comparison" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Filter-Context Comparison
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Filter-Context Comparison">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#standard-measure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Standard Measure
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filter-removal-measure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Filter-Removal Measure
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-use-calculate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Use CALCULATE?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#column-level-filter-removal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Column-Level Filter Removal
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Column-Level Filter Removal">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#column-level-removal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Column-Level Removal
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#table-level-removal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table-Level Removal
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-with-multiple-filters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example with Multiple Filters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-use-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common Use Cases
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Common Use Cases">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#benchmark-against-a-wider-group" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Benchmark Against a Wider Group
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixed-reference-line" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed Reference Line
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ignore-a-slicer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ignore a Slicer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparative-measures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparative Measures
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assumptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assumptions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common Pitfalls
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Common Pitfalls">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#removing-too-much-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Removing Too Much Context
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#removing-the-wrong-column" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Removing the Wrong Column
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#assuming-visual-layout-equals-filter-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assuming Visual Layout Equals Filter Context
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#repeating-aggregation-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repeating Aggregation Logic
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Performance Considerations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alternatives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternatives
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alternatives">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#all" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ALL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#allselected" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ALLSELECTED
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#allexcept" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ALLEXCEPT
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#explicit-filter-expressions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Explicit Filter Expressions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#relationship-to-percentage-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Relationship to Percentage Patterns
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related Patterns
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#classification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classification
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#revision-history" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Revision History
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="dax-pattern-004-ignore-a-specific-filter">DAX Pattern 004 — Ignore a Specific Filter</h1>
+<h2 id="purpose">Purpose</h2>
+<p>Calculate a measure while deliberately ignoring one specific filter but preserving the rest of the current report context.</p>
+<p>This is useful when a calculation should remain responsive to most slicers and filters while being unaffected by one particular dimension or attribute.</p>
+<hr />
+<h2 id="when-to-use">When to Use</h2>
+<p>Use this pattern when:</p>
+<ul>
+<li>A measure should ignore one slicer or visual grouping.</li>
+<li>A benchmark or baseline should remain constant across one dimension.</li>
+<li>A calculation should preserve filters such as Year, Region or Channel while ignoring Product Category.</li>
+<li>A comparison requires the current value and a reference value evaluated under different filter contexts.</li>
+</ul>
+<hr />
+<h2 id="business-example">Business Example</h2>
+<p>Assume a report shows sales by Product Category:</p>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th style="text-align: right;">Sales</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Clothing</td>
+<td style="text-align: right;">£500,000</td>
+</tr>
+<tr>
+<td>Footwear</td>
+<td style="text-align: right;">£300,000</td>
+</tr>
+<tr>
+<td>Accessories</td>
+<td style="text-align: right;">£200,000</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align: right;"><strong>£1,000,000</strong></td>
+</tr>
+</tbody>
+</table>
+<p>The report also contains filters for:</p>
+<pre><code class="language-text">Year = 2026
+Region = North
+</code></pre>
+<p>The requirement is to show total sales for the selected Year and Region while ignoring whichever Category is currently displayed.</p>
+<p>The expected result is:</p>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th style="text-align: right;">Sales</th>
+<th style="text-align: right;">Sales Ignoring Category</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Clothing</td>
+<td style="text-align: right;">£500,000</td>
+<td style="text-align: right;">£1,000,000</td>
+</tr>
+<tr>
+<td>Footwear</td>
+<td style="text-align: right;">£300,000</td>
+<td style="text-align: right;">£1,000,000</td>
+</tr>
+<tr>
+<td>Accessories</td>
+<td style="text-align: right;">£200,000</td>
+<td style="text-align: right;">£1,000,000</td>
+</tr>
+</tbody>
+</table>
+<p>The reference value remains the same for each category because the Category filter is deliberately removed.</p>
+<hr />
+<h2 id="base-measure">Base Measure</h2>
+<p>Use an existing reusable base measure:</p>
+<pre><code class="language-DAX">Total Sales =
+SUM ( Sales[Sales Amount] )
+</code></pre>
+<hr />
+<h2 id="dax-pattern">DAX Pattern</h2>
+<pre><code class="language-DAX">Sales Ignoring Category =
+CALCULATE (
+    [Total Sales],
+    REMOVEFILTERS ( Product[Category] )
+)
+</code></pre>
+<hr />
+<h2 id="how-it-works">How It Works</h2>
+<h3 id="1-start-with-the-current-filter-context">1. Start with the Current Filter Context</h3>
+<p>Suppose the current visual row is:</p>
+<pre><code class="language-text">Category = Clothing
+</code></pre>
+<p>and the report has:</p>
+<pre><code class="language-text">Year   = 2026
+Region = North
+</code></pre>
+<p>The original filter context is therefore:</p>
+<pre><code class="language-text">Year     = 2026
+Region   = North
+Category = Clothing
+</code></pre>
+<p><code>[Total Sales]</code> evaluated directly in this context returns:</p>
+<pre><code class="language-text">£500,000
+</code></pre>
+<hr />
+<h2 id="2-modify-the-filter-context">2. Modify the Filter Context</h2>
+<p>The measure uses:</p>
+<pre><code class="language-DAX">CALCULATE (
+    [Total Sales],
+    REMOVEFILTERS ( Product[Category] )
+)
+</code></pre>
+<p><code>CALCULATE</code> evaluates <code>[Total Sales]</code> under a modified filter context.</p>
+<p><code>REMOVEFILTERS</code> removes:</p>
+<pre><code class="language-text">Category = Clothing
+</code></pre>
+<p>while leaving the other filters intact.</p>
+<p>The resulting context is therefore:</p>
+<pre><code class="language-text">Year     = 2026
+Region   = North
+Category = ALL
+</code></pre>
+<p>The result becomes:</p>
+<pre><code class="language-text">£1,000,000
+</code></pre>
+<hr />
+<h2 id="key-principle">Key Principle</h2>
+<p>This pattern does <strong>not</strong> mean:</p>
+<blockquote>
+<p>Ignore all report filters.</p>
+</blockquote>
+<p>It means:</p>
+<blockquote>
+<p>Ignore this specific filter while retaining the remaining context.</p>
+</blockquote>
+<p>That distinction is fundamental to reusable DAX design.</p>
+<hr />
+<h2 id="filter-context-comparison">Filter-Context Comparison</h2>
+<h3 id="standard-measure">Standard Measure</h3>
+<pre><code class="language-DAX">[Total Sales]
+</code></pre>
+<p>For Clothing:</p>
+<pre><code class="language-text">Year     = 2026
+Region   = North
+Category = Clothing
+
+Result = £500,000
+</code></pre>
+<h3 id="filter-removal-measure">Filter-Removal Measure</h3>
+<pre><code class="language-DAX">[Sales Ignoring Category]
+</code></pre>
+<p>For Clothing:</p>
+<pre><code class="language-text">Year     = 2026
+Region   = North
+Category = ALL
+
+Result = £1,000,000
+</code></pre>
+<p>Only the intended filter has changed.</p>
+<hr />
+<h2 id="why-use-calculate">Why Use <code>CALCULATE</code>?</h2>
+<p><code>CALCULATE</code> is one of the most important DAX functions because it allows an expression to be evaluated under a modified filter context.</p>
+<p>Conceptually:</p>
+<pre><code class="language-text">Existing filter context
+        ↓
+CALCULATE
+        ↓
+Apply filter changes
+        ↓
+Evaluate expression
+</code></pre>
+<p>For this pattern:</p>
+<pre><code class="language-text">Current context
+        ↓
+Remove Product[Category]
+        ↓
+Evaluate [Total Sales]
+</code></pre>
+<p>The aggregation itself has not changed.</p>
+<p>The context in which the aggregation is evaluated has changed.</p>
+<hr />
+<h2 id="column-level-filter-removal">Column-Level Filter Removal</h2>
+<p>This pattern deliberately uses:</p>
+<pre><code class="language-DAX">REMOVEFILTERS ( Product[Category] )
+</code></pre>
+<p>rather than:</p>
+<pre><code class="language-DAX">REMOVEFILTERS ( Product )
+</code></pre>
+<p>The difference is significant.</p>
+<h3 id="column-level-removal">Column-Level Removal</h3>
+<pre><code class="language-DAX">REMOVEFILTERS ( Product[Category] )
+</code></pre>
+<p>removes only the Category filter.</p>
+<p>Other Product-table filters may remain active.</p>
+<h3 id="table-level-removal">Table-Level Removal</h3>
+<pre><code class="language-DAX">REMOVEFILTERS ( Product )
+</code></pre>
+<p>removes filters from the entire Product table.</p>
+<p>That could unintentionally remove filters such as:</p>
+<pre><code class="language-text">Brand
+Department
+Product
+Season
+</code></pre>
+<p>Use the narrowest filter-removal scope that satisfies the business requirement.</p>
+<hr />
+<h2 id="example-with-multiple-filters">Example with Multiple Filters</h2>
+<p>Assume the report context is:</p>
+<pre><code class="language-text">Year       = 2026
+Region     = North
+Department = Womenswear
+Category   = Dresses
+</code></pre>
+<p>The measure:</p>
+<pre><code class="language-DAX">Sales Ignoring Category =
+CALCULATE (
+    [Total Sales],
+    REMOVEFILTERS ( Product[Category] )
+)
+</code></pre>
+<p>changes the evaluation context to:</p>
+<pre><code class="language-text">Year       = 2026
+Region     = North
+Department = Womenswear
+Category   = ALL
+</code></pre>
+<p>The Department filter remains active.</p>
+<p>The result therefore represents:</p>
+<blockquote>
+<p>Sales for all categories within Womenswear, North, during 2026.</p>
+</blockquote>
+<hr />
+<h2 id="common-use-cases">Common Use Cases</h2>
+<h3 id="benchmark-against-a-wider-group">Benchmark Against a Wider Group</h3>
+<p>Compare an individual category with the wider Department total.</p>
+<h3 id="fixed-reference-line">Fixed Reference Line</h3>
+<p>Create a reference value that remains constant across a visual axis.</p>
+<h3 id="ignore-a-slicer">Ignore a Slicer</h3>
+<p>Allow a measure to disregard a specific selection while other measures continue to respond to it.</p>
+<h3 id="comparative-measures">Comparative Measures</h3>
+<p>Create a current-context value and a broader-context comparison value.</p>
+<hr />
+<h2 id="assumptions">Assumptions</h2>
+<p>This pattern assumes:</p>
+<ul>
+<li>A reusable base measure already exists.</li>
+<li>The filter to be removed can be clearly identified.</li>
+<li>Other report filters should remain active.</li>
+<li>The semantic model contains appropriate dimension relationships.</li>
+<li>Removing the specified filter produces the intended analytical context.</li>
+</ul>
+<hr />
+<h2 id="common-pitfalls">Common Pitfalls</h2>
+<h3 id="removing-too-much-context">Removing Too Much Context</h3>
+<p>Using:</p>
+<pre><code class="language-DAX">REMOVEFILTERS ()
+</code></pre>
+<p>or removing an entire table may produce a denominator or reference value that ignores important report selections.</p>
+<h3 id="removing-the-wrong-column">Removing the Wrong Column</h3>
+<p>The filter being removed must correspond to the business question.</p>
+<p>For example:</p>
+<pre><code class="language-DAX">REMOVEFILTERS ( Product[Category] )
+</code></pre>
+<p>and:</p>
+<pre><code class="language-DAX">REMOVEFILTERS ( Product[Department] )
+</code></pre>
+<p>answer different analytical questions.</p>
+<h3 id="assuming-visual-layout-equals-filter-context">Assuming Visual Layout Equals Filter Context</h3>
+<p>A column appearing in a visual does not necessarily mean it is the only filter affecting the measure.</p>
+<p>Slicers, page filters, report filters and cross-filtering can all contribute to the current context.</p>
+<h3 id="repeating-aggregation-logic">Repeating Aggregation Logic</h3>
+<p>Prefer:</p>
+<pre><code class="language-DAX">CALCULATE (
+    [Total Sales],
+    REMOVEFILTERS ( Product[Category] )
+)
+</code></pre>
+<p>rather than repeating:</p>
+<pre><code class="language-DAX">SUM ( Sales[Sales Amount] )
+</code></pre>
+<p>inside every dependent measure.</p>
+<hr />
+<h2 id="performance-considerations">Performance Considerations</h2>
+<p>This pattern is generally inexpensive in a well-designed star schema.</p>
+<p>Good practice includes:</p>
+<ul>
+<li>Removing filters from dimension columns rather than large fact tables.</li>
+<li>Reusing existing base measures.</li>
+<li>Keeping filter manipulation as narrow as possible.</li>
+<li>Avoiding unnecessary iterator functions.</li>
+<li>Testing behaviour in visuals containing multiple interacting filters.</li>
+</ul>
+<p>The main consideration is usually analytical correctness rather than computational cost.</p>
+<hr />
+<h2 id="alternatives">Alternatives</h2>
+<p>Depending on the requirement, related functions include:</p>
+<h3 id="all"><code>ALL</code></h3>
+<p>Can also remove filters and is commonly encountered in existing DAX.</p>
+<h3 id="allselected"><code>ALLSELECTED</code></h3>
+<p>Useful when the calculation should preserve the user's wider selected set.</p>
+<h3 id="allexcept"><code>ALLEXCEPT</code></h3>
+<p>Useful when most filters on a table should be removed while explicitly preserving selected columns.</p>
+<h3 id="explicit-filter-expressions">Explicit Filter Expressions</h3>
+<p><code>CALCULATE</code> can also add or replace filters directly rather than only removing them.</p>
+<p>These approaches should be chosen according to the required filter behaviour rather than syntax preference.</p>
+<hr />
+<h2 id="relationship-to-percentage-patterns">Relationship to Percentage Patterns</h2>
+<p>Pattern 001 — Percentage of Total uses this same principle when calculating its denominator:</p>
+<pre><code class="language-DAX">CALCULATE (
+    [Total Sales],
+    REMOVEFILTERS ( Product[Category] )
+)
+</code></pre>
+<p>The difference is that Pattern 004 isolates the filter-context technique itself.</p>
+<p>This makes it reusable for many calculations that have nothing to do with percentages.</p>
+<hr />
+<h2 id="related-patterns">Related Patterns</h2>
+<ul>
+<li><a href="../../percentages/percentage-of-total/">Percentage of Total</a></li>
+<li>Percentage of Selected Total</li>
+<li>Preserve Selected Filters</li>
+<li>Remove All Filters from a Dimension</li>
+<li>Keep Only Specific Filters</li>
+<li>Fixed Benchmark Measure</li>
+</ul>
+<hr />
+<h2 id="classification">Classification</h2>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type</td>
+<td>Measure Pattern</td>
+</tr>
+<tr>
+<td>Category</td>
+<td>Filter Context</td>
+</tr>
+<tr>
+<td>Difficulty</td>
+<td>Basic / Intermediate</td>
+</tr>
+<tr>
+<td>Context Dependency</td>
+<td>High</td>
+</tr>
+<tr>
+<td>Reusability</td>
+<td>High</td>
+</tr>
+<tr>
+<td>Performance Sensitivity</td>
+<td>Low</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="notes">Notes</h2>
+<p>The key concept in this pattern is:</p>
+<blockquote>
+<p>DAX calculations are often changed not by altering the aggregation, but by changing the filter context in which that aggregation is evaluated.</p>
+</blockquote>
+<p>Understanding deliberate filter removal is foundational to more advanced use of <code>CALCULATE</code>.</p>
+<hr />
+<h2 id="revision-history">Revision History</h2>
+<table>
+<thead>
+<tr>
+<th>Version</th>
+<th>Date</th>
+<th>Change</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.0</td>
+<td>2026-08-18</td>
+<td>Initial version</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><a href="../">← Back to Filter Context Patterns</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 Carl Patten. All rights reserved.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

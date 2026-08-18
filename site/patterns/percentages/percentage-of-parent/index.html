@@ -1,0 +1,1818 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A curated reference library of reusable DAX patterns for Power BI.">
+      
+      
+        <meta name="author" content="Carl Patten">
+      
+      
+      
+        <link rel="prev" href="../percentage-of-selected-total/">
+      
+      
+        <link rel="next" href="../../filter-context/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>003 — Percentage of Parent - DAX Reference Library</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dax-pattern-003-percentage-of-parent" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="DAX Reference Library" class="md-header__button md-logo" aria-label="DAX Reference Library" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            DAX Reference Library
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              003 — Percentage of Parent
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="DAX Reference Library" class="md-nav__button md-logo" aria-label="DAX Reference Library" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    DAX Reference Library
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Patterns
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Patterns
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Percentages
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Percentages
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../percentage-of-total/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    001 — Percentage of Total
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../percentage-of-selected-total/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    002 — Percentage of Selected Total
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    003 — Percentage of Parent
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    003 — Percentage of Parent
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#purpose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#when-to-use" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When to Use
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#business-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Business Example
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#base-measure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Base Measure
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dax-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DAX Pattern
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Works
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How It Works">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-determine-the-current-hierarchy-level" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Determine the Current Hierarchy Level
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-product-level-calculation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Product-Level Calculation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-category-level-calculation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Category-Level Calculation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-department-level-calculation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Department-Level Calculation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-isinscope-is-important" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why ISINSCOPE Is Important
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#evaluation-order" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Evaluation Order
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#filter-context-behaviour" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Filter-Context Behaviour
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assumptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assumptions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common Pitfalls
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Common Pitfalls">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#checking-hierarchy-levels-in-the-wrong-order" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checking Hierarchy Levels in the Wrong Order
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#removing-too-many-filters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Removing Too Many Filters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-hasonevalue-as-a-substitute" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using HASONEVALUE as a Substitute
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ignoring-subtotals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ignoring Subtotals
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#grand-total-behaviour" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Grand Total Behaviour
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#optional-grand-total-version" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Optional Grand Total Version
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Performance Considerations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alternatives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternatives
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related Patterns
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#classification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classification
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#revision-history" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Revision History
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Filter Context
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Filter Context
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../filter-context/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../filter-context/ignore-specific-filter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    004 — Ignore a Specific Filter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../filter-context/keep-only-specific-filter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    005 — Keep Only a Specific Filter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../copyright-and-use/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Copyright and Use
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#purpose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#when-to-use" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When to Use
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#business-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Business Example
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#base-measure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Base Measure
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dax-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DAX Pattern
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Works
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How It Works">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-determine-the-current-hierarchy-level" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Determine the Current Hierarchy Level
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-product-level-calculation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Product-Level Calculation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-category-level-calculation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Category-Level Calculation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-department-level-calculation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Department-Level Calculation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-isinscope-is-important" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why ISINSCOPE Is Important
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#evaluation-order" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Evaluation Order
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#filter-context-behaviour" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Filter-Context Behaviour
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assumptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assumptions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common Pitfalls
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Common Pitfalls">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#checking-hierarchy-levels-in-the-wrong-order" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checking Hierarchy Levels in the Wrong Order
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#removing-too-many-filters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Removing Too Many Filters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-hasonevalue-as-a-substitute" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using HASONEVALUE as a Substitute
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ignoring-subtotals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ignoring Subtotals
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#grand-total-behaviour" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Grand Total Behaviour
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#optional-grand-total-version" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Optional Grand Total Version
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Performance Considerations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alternatives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternatives
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related Patterns
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#classification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classification
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#revision-history" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Revision History
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="dax-pattern-003-percentage-of-parent">DAX Pattern 003 — Percentage of Parent</h1>
+<h2 id="purpose">Purpose</h2>
+<p>Calculate the contribution of the current item relative to its immediate parent within a hierarchy.</p>
+<p>A common example is calculating:</p>
+<ul>
+<li>Product as a percentage of Category.</li>
+<li>Category as a percentage of Department.</li>
+<li>Department as a percentage of Total.</li>
+</ul>
+<p>This pattern is useful when the denominator needs to change depending on the hierarchy level currently being displayed.</p>
+<hr />
+<h2 id="when-to-use">When to Use</h2>
+<p>Use this pattern when:</p>
+<ul>
+<li>A matrix or hierarchical visual contains multiple levels.</li>
+<li>The denominator must represent the current item's immediate parent.</li>
+<li>Percentage contribution should be meaningful at each hierarchy level.</li>
+<li>A single measure needs to behave differently depending on drill level.</li>
+</ul>
+<hr />
+<h2 id="business-example">Business Example</h2>
+<p>Assume the hierarchy is:</p>
+<pre><code class="language-text">Department
+    ↓
+Category
+    ↓
+Product
+</code></pre>
+<p>Example data:</p>
+<table>
+<thead>
+<tr>
+<th>Department</th>
+<th>Category</th>
+<th>Product</th>
+<th style="text-align: right;">Sales</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Womenswear</td>
+<td>Dresses</td>
+<td>Product A</td>
+<td style="text-align: right;">£200,000</td>
+</tr>
+<tr>
+<td>Womenswear</td>
+<td>Dresses</td>
+<td>Product B</td>
+<td style="text-align: right;">£300,000</td>
+</tr>
+<tr>
+<td>Womenswear</td>
+<td>Knitwear</td>
+<td>Product C</td>
+<td style="text-align: right;">£250,000</td>
+</tr>
+<tr>
+<td>Womenswear</td>
+<td>Knitwear</td>
+<td>Product D</td>
+<td style="text-align: right;">£250,000</td>
+</tr>
+</tbody>
+</table>
+<p>Totals:</p>
+<pre><code class="language-text">Womenswear        £1,000,000
+
+Dresses             £500,000
+Knitwear            £500,000
+
+Product A           £200,000
+Product B           £300,000
+Product C           £250,000
+Product D           £250,000
+</code></pre>
+<p>The required percentages are:</p>
+<pre><code class="language-text">Product A = 40% of Dresses
+Product B = 60% of Dresses
+
+Dresses   = 50% of Womenswear
+Knitwear  = 50% of Womenswear
+</code></pre>
+<p>The denominator therefore changes depending on the current hierarchy level.</p>
+<hr />
+<h2 id="base-measure">Base Measure</h2>
+<p>Use the existing base measure:</p>
+<pre><code class="language-DAX">Total Sales =
+SUM ( Sales[Sales Amount] )
+</code></pre>
+<hr />
+<h2 id="dax-pattern">DAX Pattern</h2>
+<pre><code class="language-DAX">Sales % of Parent =
+VAR CurrentSales =
+    [Total Sales]
+
+VAR ParentSales =
+    SWITCH (
+        TRUE (),
+
+        ISINSCOPE ( Product[Product] ),
+            CALCULATE (
+                [Total Sales],
+                REMOVEFILTERS ( Product[Product] )
+            ),
+
+        ISINSCOPE ( Product[Category] ),
+            CALCULATE (
+                [Total Sales],
+                REMOVEFILTERS ( Product[Category] )
+            ),
+
+        ISINSCOPE ( Product[Department] ),
+            CALCULATE (
+                [Total Sales],
+                REMOVEFILTERS ( Product[Department] )
+            )
+    )
+
+RETURN
+    DIVIDE (
+        CurrentSales,
+        ParentSales
+    )
+</code></pre>
+<hr />
+<h2 id="how-it-works">How It Works</h2>
+<h3 id="1-determine-the-current-hierarchy-level">1. Determine the Current Hierarchy Level</h3>
+<p>The measure uses:</p>
+<pre><code class="language-DAX">ISINSCOPE ( ... )
+</code></pre>
+<p>to identify which hierarchy level is currently being evaluated.</p>
+<p>For example:</p>
+<pre><code class="language-DAX">ISINSCOPE ( Product[Product] )
+</code></pre>
+<p>returns <code>TRUE</code> when the visual is currently evaluating an individual product row.</p>
+<p>Likewise:</p>
+<pre><code class="language-DAX">ISINSCOPE ( Product[Category] )
+</code></pre>
+<p>returns <code>TRUE</code> when the current evaluation level is Category.</p>
+<hr />
+<h2 id="2-product-level-calculation">2. Product-Level Calculation</h2>
+<p>If the current row is:</p>
+<pre><code class="language-text">Product A
+</code></pre>
+<p>the measure evaluates:</p>
+<pre><code class="language-DAX">CALCULATE (
+    [Total Sales],
+    REMOVEFILTERS ( Product[Product] )
+)
+</code></pre>
+<p>This removes the product-level filter while retaining the Category and Department filters.</p>
+<p>The context therefore changes from:</p>
+<pre><code class="language-text">Department = Womenswear
+Category   = Dresses
+Product    = Product A
+</code></pre>
+<p>to:</p>
+<pre><code class="language-text">Department = Womenswear
+Category   = Dresses
+Product    = ALL
+</code></pre>
+<p>The denominator becomes total sales for Dresses:</p>
+<pre><code class="language-text">£500,000
+</code></pre>
+<p>Therefore:</p>
+<pre><code class="language-text">£200,000
+────────── = 40%
+£500,000
+</code></pre>
+<hr />
+<h2 id="3-category-level-calculation">3. Category-Level Calculation</h2>
+<p>If the current row is:</p>
+<pre><code class="language-text">Dresses
+</code></pre>
+<p>the measure evaluates:</p>
+<pre><code class="language-DAX">CALCULATE (
+    [Total Sales],
+    REMOVEFILTERS ( Product[Category] )
+)
+</code></pre>
+<p>The context changes from:</p>
+<pre><code class="language-text">Department = Womenswear
+Category   = Dresses
+</code></pre>
+<p>to:</p>
+<pre><code class="language-text">Department = Womenswear
+Category   = ALL
+</code></pre>
+<p>The denominator becomes:</p>
+<pre><code class="language-text">Womenswear sales = £1,000,000
+</code></pre>
+<p>Therefore:</p>
+<pre><code class="language-text">£500,000
+────────── = 50%
+£1,000,000
+</code></pre>
+<hr />
+<h2 id="4-department-level-calculation">4. Department-Level Calculation</h2>
+<p>At Department level:</p>
+<pre><code class="language-DAX">REMOVEFILTERS ( Product[Department] )
+</code></pre>
+<p>removes the Department restriction.</p>
+<p>The denominator therefore becomes the relevant higher-level total within the remaining filter context.</p>
+<hr />
+<h2 id="why-isinscope-is-important">Why <code>ISINSCOPE</code> Is Important</h2>
+<p>A hierarchy can produce different filter combinations depending on:</p>
+<ul>
+<li>Drill level.</li>
+<li>Expand/collapse state.</li>
+<li>Matrix structure.</li>
+<li>Subtotals.</li>
+<li>Report filters.</li>
+</ul>
+<p>Simply checking whether a column is filtered is not always sufficient.</p>
+<p><code>ISINSCOPE</code> is designed to identify whether a hierarchy column is currently participating as the active grouping level in the visual.</p>
+<p>This makes it particularly useful for hierarchy-aware measures.</p>
+<hr />
+<h2 id="evaluation-order">Evaluation Order</h2>
+<p>The order of the <code>SWITCH</code> conditions matters.</p>
+<p>The measure checks the most detailed level first:</p>
+<pre><code class="language-text">Product
+↓
+Category
+↓
+Department
+</code></pre>
+<p>This is necessary because when Product is in scope, Category and Department may also form part of the wider filter context.</p>
+<p>The measure should therefore detect the lowest active hierarchy level first.</p>
+<hr />
+<h2 id="filter-context-behaviour">Filter-Context Behaviour</h2>
+<p>At Product level:</p>
+<pre><code class="language-text">Numerator:
+Department = Womenswear
+Category   = Dresses
+Product    = Product A
+
+Denominator:
+Department = Womenswear
+Category   = Dresses
+Product    = ALL
+</code></pre>
+<p>At Category level:</p>
+<pre><code class="language-text">Numerator:
+Department = Womenswear
+Category   = Dresses
+
+Denominator:
+Department = Womenswear
+Category   = ALL
+</code></pre>
+<p>The result is always:</p>
+<blockquote>
+<p>Current item ÷ immediate parent total</p>
+</blockquote>
+<hr />
+<h2 id="assumptions">Assumptions</h2>
+<p>This pattern assumes:</p>
+<ul>
+<li>A recognised hierarchy exists.</li>
+<li>The hierarchy levels are stored in dimension columns.</li>
+<li><code>[Total Sales]</code> already exists.</li>
+<li>The hierarchy is evaluated from higher to lower levels.</li>
+<li>Removing the current-level filter produces the required immediate parent context.</li>
+<li>Model relationships are correctly configured.</li>
+</ul>
+<hr />
+<h2 id="common-pitfalls">Common Pitfalls</h2>
+<h3 id="checking-hierarchy-levels-in-the-wrong-order">Checking Hierarchy Levels in the Wrong Order</h3>
+<p>This can cause the measure to return the wrong denominator.</p>
+<p>Always test the most detailed level first.</p>
+<h3 id="removing-too-many-filters">Removing Too Many Filters</h3>
+<p>For Product percentage of Category, removing Category as well as Product would calculate Product as a percentage of Department rather than Category.</p>
+<h3 id="using-hasonevalue-as-a-substitute">Using <code>HASONEVALUE</code> as a Substitute</h3>
+<p><code>HASONEVALUE</code> answers whether one value exists in the current filter context.</p>
+<p>That is not the same question as whether a column is the active hierarchy level.</p>
+<p>For hierarchy-aware calculations, <code>ISINSCOPE</code> is usually the clearer choice.</p>
+<h3 id="ignoring-subtotals">Ignoring Subtotals</h3>
+<p>Hierarchy measures should always be tested against:</p>
+<ul>
+<li>Detail rows.</li>
+<li>Parent rows.</li>
+<li>Subtotals.</li>
+<li>Grand totals.</li>
+</ul>
+<p>The required subtotal behaviour should be explicitly defined.</p>
+<hr />
+<h2 id="grand-total-behaviour">Grand Total Behaviour</h2>
+<p>At the grand-total level, none of the hierarchy columns may be in scope.</p>
+<p>In that situation:</p>
+<pre><code class="language-DAX">ParentSales
+</code></pre>
+<p>may evaluate to <code>BLANK()</code>.</p>
+<p>The resulting percentage will therefore also return blank.</p>
+<p>This is often desirable because a grand total being "a percentage of its parent" may have no meaningful business interpretation.</p>
+<p>If the requirement is to show:</p>
+<pre><code class="language-text">100%
+</code></pre>
+<p>at the grand total, that behaviour should be added deliberately rather than assumed.</p>
+<hr />
+<h2 id="optional-grand-total-version">Optional Grand Total Version</h2>
+<p>If the requirement is for the grand total to display <code>100%</code>, the pattern can be extended:</p>
+<pre><code class="language-DAX">Sales % of Parent =
+VAR CurrentSales =
+    [Total Sales]
+
+VAR ParentSales =
+    SWITCH (
+        TRUE (),
+
+        ISINSCOPE ( Product[Product] ),
+            CALCULATE (
+                [Total Sales],
+                REMOVEFILTERS ( Product[Product] )
+            ),
+
+        ISINSCOPE ( Product[Category] ),
+            CALCULATE (
+                [Total Sales],
+                REMOVEFILTERS ( Product[Category] )
+            ),
+
+        ISINSCOPE ( Product[Department] ),
+            CALCULATE (
+                [Total Sales],
+                REMOVEFILTERS ( Product[Department] )
+            ),
+
+        [Total Sales]
+    )
+
+RETURN
+    DIVIDE (
+        CurrentSales,
+        ParentSales
+    )
+</code></pre>
+<p>At grand total:</p>
+<pre><code class="language-text">Current Sales ÷ Current Sales = 100%
+</code></pre>
+<p>Use this variation only where the business presentation requires it.</p>
+<hr />
+<h2 id="performance-considerations">Performance Considerations</h2>
+<p>This pattern is generally inexpensive for standard dimensional models.</p>
+<p>Consider:</p>
+<ul>
+<li>Keeping hierarchy columns within a proper dimension table.</li>
+<li>Using reusable base measures.</li>
+<li>Avoiding unnecessary iterators.</li>
+<li>Limiting filter removal to the relevant hierarchy column.</li>
+<li>Testing matrix behaviour where the hierarchy contains many members.</li>
+</ul>
+<p>The complexity of this pattern is primarily contextual rather than computational.</p>
+<hr />
+<h2 id="alternatives">Alternatives</h2>
+<p>Depending on the model and hierarchy design, alternatives may include:</p>
+<ul>
+<li>Separate measures for each hierarchy level.</li>
+<li>Explicit <code>CALCULATE</code> logic tied to individual visuals.</li>
+<li><code>ALLSELECTED</code> when the parent denominator must respect a user-defined selected set.</li>
+<li>Calculation groups for reusable hierarchy-aware behaviour.</li>
+</ul>
+<p>A single <code>ISINSCOPE</code> measure is particularly useful when one measure needs to adapt dynamically across hierarchy levels.</p>
+<hr />
+<h2 id="related-patterns">Related Patterns</h2>
+<ul>
+<li><a href="../percentage-of-total/">Percentage of Total</a></li>
+<li><a href="../percentage-of-selected-total/">Percentage of Selected Total</a></li>
+<li>Percentage Within Group</li>
+<li>Hierarchy-Aware Variance</li>
+<li>Dynamic Matrix Measures</li>
+</ul>
+<hr />
+<h2 id="classification">Classification</h2>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type</td>
+<td>Measure Pattern</td>
+</tr>
+<tr>
+<td>Category</td>
+<td>Percentages</td>
+</tr>
+<tr>
+<td>Difficulty</td>
+<td>Intermediate</td>
+</tr>
+<tr>
+<td>Context Dependency</td>
+<td>High</td>
+</tr>
+<tr>
+<td>Reusability</td>
+<td>High</td>
+</tr>
+<tr>
+<td>Performance Sensitivity</td>
+<td>Low</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="notes">Notes</h2>
+<p>The key concept in this pattern is:</p>
+<blockquote>
+<p>The denominator is determined by the hierarchy level currently in scope.</p>
+</blockquote>
+<p><code>ISINSCOPE</code> identifies that level, while <code>CALCULATE</code> and <code>REMOVEFILTERS</code> create the appropriate parent context.</p>
+<p>This allows one measure to behave intelligently across multiple drill levels.</p>
+<hr />
+<h2 id="revision-history">Revision History</h2>
+<table>
+<thead>
+<tr>
+<th>Version</th>
+<th>Date</th>
+<th>Change</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.0</td>
+<td>2026-08-18</td>
+<td>Initial version</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><a href="../">← Back to Percentage Patterns</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 Carl Patten. All rights reserved.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
