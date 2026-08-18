@@ -18,4 +18,5 @@ nav:
           - "003 — Percentage of Parent": patterns/percentages/percentage-of-parent.md
       - Filter Context:
           - Overview: patterns/filter-context/index.md
-          - "004 — Ignore a Specific Filter": patterns/filter-context/ignore-specific-filter.md          
+          - "004 — Ignore a Specific Filter": patterns/filter-context/ignore-specific-filter.md 
+          - "005 — Keep Only a Specific Filter": patterns/filter-context/keep-only-specific-filter.md

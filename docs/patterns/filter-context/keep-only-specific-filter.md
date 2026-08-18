@@ -1,4 +1,4 @@
-# DAX Pattern 005 — Keep Only Specific Filters
+# DAX Pattern 005 — Keep Only Specific Filter
 
 ## Purpose
 
